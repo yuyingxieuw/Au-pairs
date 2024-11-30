@@ -1,134 +1,91 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Au Pair Particaption in US 2016-2022</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Yuying Xie">
-  <meta name="generator" content="">
-  <title>Web maker: Yuying Xie </title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
+  </head>
 
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/starter-template/">
+  <body>
+    <!-- "navigation bar" -->
+    <header>
+      <h1><a href="index.html" style="color: white; text-decoration: none;">Au Pair Particaption Dashboard</a></h1>
+    </style>
+      <nav>
+          <ul class="nav__links">
 
+              <li><a href="datasources.html" style="color: white">Data Sources</a></li>
+              <li><a href="about.html" style="color: white">About</a></li>
+              <li><a href="authors.html" style="color: white">Authors</a></li>
+          </ul>
+      </nav>
+  </header>  
+  <!--  -->
+    <script src="./assets/data_for_choropleth.js"></script>
 
+    <div class="container">
+      <div class="widgets">
+        <div class="widget-background"></div>
+        <div class="widget" style="height: 50%">
+          <h2>Global Plastic Production & Recycling </h2>
+          <div id="curve_chart"></div>
+          <!--<p>Data: <a href="https://github.com/myho1998/The-world-s-plastic-polution/blob/main/assets/global-plastics-production.csv" target="_blank">Global Plastic Production Dataset</a></p>-->
+          <p>This chart visualizes global plastic production vs. global plastic recycled from 1950-2019. The gap between production and recycling is huge, which represents a large gap in the world's management of plastic.</p>
+        </div>
+        <!--  -->
 
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- PIE CHART SECTION -->
+        <!-- "widget" div -->
+        <div class="widget" style="height: 50%">
+          <h2>Plastic Exports by</h2>
 
+          <!-- Categories Dropdown menu area -->
+          <div class="dropdown">
+            <button id="pie_selector" class="dropbtn">Country</button>
+            <div class="dropdown-content">
+              <a href="#" onclick="selectView('Country')">Country</a>
+              <a href="#" onclick="selectView('Continent')">Continent</a>
+              <a href="#" onclick="selectView('Income Level')">Income Level</a>
+            </div>
+          </div>
+          <!-- -->
 
+          <link rel='css' href='css/style.css' />
+          <link rel='css' href='css/bootstrap.min.css' />
+          <link rel='css' href='css/font-awesome.min.css' />
+          <!-- Load c3.css -->
+          <link href="css/c3.css" rel="stylesheet" type="text/css">
+          <!-- Load d3.js and c3.js -->
+          <script src="js/d3.v3.min.js" charset="utf-8"></script>
+          <script src="js/c3.min.js"></script>
+          <!-- Load papaparse.js -->
+          <script src="js/papaparse.min.js"></script>
+          <div class="container">
+            <div id="chart"></div>
+          </div>
 
-  <style>
-    .lead {
-      font-weight: bold;
-      font-size: 1.2em;
-      color: #333333;
-    }
-    
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
+          <!-- Loads pie chart -->
+          <script src="js/export_pie_chart.js"></script>
+          <!-- Description of pie chart -->
+          <p>This chart visualizes global plastic exports by country, continent, and income level in 2010.</p>
+        </div> <!-- "widget" div -->
 
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
+        <!-- Loads line graph chart -->
+        <script src="js/linegraph.js"></script>
+      </div> <!-- "widgets" div -->
+      <div id="map" class="map"></div>
+    </div> <!-- "container" div -->
+  
+    <!-- CHLOROPETH MAP SECTION -->
+    <script src="js/main.js"></script>
+    <div id="map"></div>
+    <div id="legend"></div>
+    <div id="title">
 
-    body {
-        background-image: url(img/main.jpg);
-        background-size: auto;
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-      }
-    .overlay {
-        background-color: transparent; /* Adjust the alpha value to change the transparency */
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-      }
-    
-  </style>
-
-
-  <!-- Custom styles for this template -->
-  <link href="css/starter-template.css" rel="stylesheet">
-</head>
-
-<body>
-
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Au Pair Participation in Each State 2016- 2022</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Presentation<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="map1.html">Charging Stations</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="map3.html">Heat Map</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <main role="main" class="container overlay">
-
-    <div class="starter-template">
-      <h1><b>Au Pair Participation in Each State 2016- 2022</b></h1>
-      <h3>Made by Yuying Xie </h3>
-      <p></p>
-    <h4><b>Introduction:</b></h4>
-      <p class="lead">The Au Pair Project, often simply referred to as the Au Pair Program, is a cultural exchange initiative that allows young people (usually aged 18-26) to live with a host family in another country, provide childcare, and immerse themselves in the host country’s culture.
-
-        In the U.S., the Au Pair Program operates under the J-1 Exchange Visitor Visa Program and is administered by the U.S. Department of State. Its primary goals are to promote cultural exchange and mutual understanding between the U.S. and other countries.
-        </p>   
-    <h4><b>Key Features of the Au Pair Program:</h4></p>
-      <p></p>
-      <p class="lead">1. Cultural Exchange Focus: The au pair lives with a host family as a member of the household and participates in cultural and language exchange.This program provides an opportunity for au pairs to experience life in the U.S. while sharing their own culture with the host family.
-        2. Childcare Responsibilities: Au pairs provide up to 45 hours of childcare per week (up to 10 hours per day). This includes tasks such as preparing meals for children, helping with homework, and supervising playtime.They cannot perform non-childcare-related domestic work.
-        3. Educational Requirement: Au pairs are required to enroll in an accredited U.S. post-secondary educational institution and complete at least 6 credit hours (or equivalent), funded in part by the host family.
-        4. Program Duration: The standard program duration is 12 months, with the possibility of extending for an additional 6, 9, or 12 months.
-        5. Stipend and Benefits:Au pairs receive a minimum weekly stipend (set by the Department of State), free room and board, and contributions toward their educational expenses. Host families cover travel expenses for the au pair's arrival and return.
-        </p>
-    <h4><b>Eligibility:</h4></p>
-      <p></p>
-      <p class="lead">- Be between the ages of 18 and 26.
-        - Have prior childcare experience.
-        - Be proficient in English.
-        - Pass health and background checks. 
-        </p>
-        <p>Sources:</p>
-        <p>
-        <a href="https://j1visa.state.gov/programs/au-pair" style="color: red;">Bridge USA </a>
-        </p>
-    </div>
-
-  </main><!-- /.container -->
-
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script>
-    window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
-  </script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-
-
-</body>
-
+  </body>
 </html>
