@@ -4,53 +4,55 @@
     <title>Au Pair Particaption in US 2016-2022</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
-    <link href="./css/style.css" rel="stylesheet" />
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- "pie chart library" -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script> <!-- "mapbox library" -->
+    <link href="./css/style.css" rel="stylesheet" /> 
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet"> 
   </head>
 
   <body>
     <!-- "navigation bar" -->
     <header>
-      <h1><a href="index.html" style="color: white; text-decoration: none;">Au Pair Particaption Dashboard</a></h1>
+      <h1><a href="index.html" style="color: white; text-decoration: none;">Au Pair Particaption</a></h1>
     </style>
       <nav>
           <ul class="nav__links">
-
-              <li><a href="datasources.html" style="color: white">Data Sources</a></li>
               <li><a href="about.html" style="color: white">About</a></li>
+              <li><a href="datasources.html" style="color: white">Data</a></li>
               <li><a href="authors.html" style="color: white">Authors</a></li>
           </ul>
       </nav>
   </header>  
-  <!--  -->
+ 
+  <!--Curve Chart SECTION?-->
     <script src="./assets/data_for_choropleth.js"></script>
 
     <div class="container">
       <div class="widgets">
         <div class="widget-background"></div>
         <div class="widget" style="height: 50%">
-          <h2>Global Plastic Production & Recycling </h2>
+          <h2>Totall Au Pair Project Participants </h2>
           <div id="curve_chart"></div>
           <!--<p>Data: <a href="https://github.com/myho1998/The-world-s-plastic-polution/blob/main/assets/global-plastics-production.csv" target="_blank">Global Plastic Production Dataset</a></p>-->
-          <p>This chart visualizes global plastic production vs. global plastic recycled from 1950-2019. The gap between production and recycling is huge, which represents a large gap in the world's management of plastic.</p>
+          <p>This chart visualizes the change of totall Au Pair Project participants during 2016-2022 in Untied States </p>
         </div>
         <!--  -->
 
         <!-- PIE CHART SECTION -->
         <!-- "widget" div -->
         <div class="widget" style="height: 50%">
-          <h2>Plastic Exports by</h2>
+          <h2>Number of participants in Year of</h2>
 
           <!-- Categories Dropdown menu area -->
           <div class="dropdown">
-            <button id="pie_selector" class="dropbtn">Country</button>
+            <button id="pie_selector" class="dropbtn">2022</button>
             <div class="dropdown-content">
-              <a href="#" onclick="selectView('Country')">Country</a>
-              <a href="#" onclick="selectView('Continent')">Continent</a>
-              <a href="#" onclick="selectView('Income Level')">Income Level</a>
+              <a href="#" onclick="selectView('2016')">2021</a>
+              <a href="#" onclick="selectView('2017')">2020</a>
+              <a href="#" onclick="selectView('2017')">2019</a>
+              <a href="#" onclick="selectView('2017')">2018</a>
+              <a href="#" onclick="selectView('2017')">2017</a>
+              <a href="#" onclick="selectView('2017')">2016</a>
             </div>
           </div>
           <!-- -->
