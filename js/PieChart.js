@@ -15,54 +15,29 @@ function loadCSV() {
           const csvData = results.data;
 
 // Extract required colums and prepare the data for the pie chart
-    const chartData
-
-
-    // Creates the pie chart
-    var summary = c3.generate({
-        bindto: '#chart',
-        data: {
-            rows: [
-                Country,
-                Exports
-            ],
-            type: 'pie',
-            labels: true,
-            onclick: function(d, i) {
-                console.log("onclick", d, i);
-            },
-            onmouseover: function(d, i) {
-                console.log("onmouseover", d, i);
-            },
-            onmouseout: function(d, i) {
-                console.log("onmouseout", d, i);
-            }
-        },
-        
-        // Creates label to show number of exports for each countries when hovered
-        tooltip: {
-            format: {
-                value: function (value, ratio, id) {
-                    return `${value} Exports`;
-                }
-            }
-        },
-
-        legend: {
-            show: false
-        }
+    const chartData = [['Category', 'Value']];
+        csvData.forEach(row => {
+        chartData.push([row['name'], parseFloat(row['2023'])]);
     });
 
-}
+//Pass the prepared data to the drawChart function
+    drawChart(chartData)
+                },
+        error: function (error) {
+        console.error('Error parsing CSV file:', error);
+        }
+        });
+        }
 
+    function drawChart(chartData) {
+            // Convert array data to Google Charts DataTable
+            const data = google.visualization.arrayToDataTable(chartData);
 
-function selectView(selection) {
-    var elem = document.getElementById("pie_selector");
-    if (elem.innerHTML != selection) {
-        elem.innerHTML = selection;
-        parseData(selection, createGraph);
-    }
-}
-
-
-parseData("Country", createGraph);
+// Define chart options
+    const options = {
+        title: 'Au Pair Participants',
+         };
+// Create and draw the pie chart
+    const chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+    }    
