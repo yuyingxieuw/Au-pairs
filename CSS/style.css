@@ -55,6 +55,7 @@ body {
   
   .widget p {
     margin-bottom: 0;
+    font-size: 13px;
   }
   
   .curve_chart {

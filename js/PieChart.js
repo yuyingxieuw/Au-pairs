@@ -36,6 +36,8 @@ function loadCSV() {
 // Define chart options
     const options = {
         title: 'Au Pair Participants',
+        width: 400,  
+        height: 200,
          };
 // Create and draw the pie chart
     const chart = new google.visualization.PieChart(document.getElementById('piechart'));
