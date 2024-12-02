@@ -5,9 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- "pie chart library" -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script> <!-- "mapbox library" -->
     <link href="./css/style.css" rel="stylesheet" /> 
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet"> 
+    
   </head>
 
   <body>
@@ -36,9 +38,14 @@
           <!--<p>Data: <a href="https://github.com/myho1998/The-world-s-plastic-polution/blob/main/assets/global-plastics-production.csv" target="_blank">Global Plastic Production Dataset</a></p>-->
           <p>This chart visualizes the change of totall Au Pair Project participants during 2016-2022 in Untied States </p>
         </div>
-        <!--  -->
+    
+     <!-- Loads line graph chart -->
+        <script src="js/linegraph.js"></script>
+      </div> <!-- "widgets" div -->
+      <div id="map" class="map"></div>
+    </div> <!-- "container" div -->
 
-        <!-- PIE CHART SECTION -->
+  <!-- PIE CHART SECTION -->
         <!-- "widget" div -->
         <div class="widget" style="height: 50%">
           <h2>Number of participants in Year of</h2>
@@ -72,16 +79,11 @@
           </div>
 
           <!-- Loads pie chart -->
-          <script src="js/export_pie_chart.js"></script>
+          <script src="js/PieChart.js"></script>
           <!-- Description of pie chart -->
           <p>This chart visualizes global plastic exports by country, continent, and income level in 2010.</p>
         </div> <!-- "widget" div -->
 
-        <!-- Loads line graph chart -->
-        <script src="js/linegraph.js"></script>
-      </div> <!-- "widgets" div -->
-      <div id="map" class="map"></div>
-    </div> <!-- "container" div -->
   
     <!-- CHLOROPETH MAP SECTION -->
     <script src="js/main.js"></script>

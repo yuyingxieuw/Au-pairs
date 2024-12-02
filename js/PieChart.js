@@ -1,64 +1,22 @@
+//load google package
+google.charts.load('current', { packages: ['corechart'] });
+google.charts.setOnLoadCallback(loadCSV);
+
 // Loads data  csv
-function parseData(selection, createGraph) {
-    Papa.parse("./assets/Shpwithyear.csv", {
+function loadCSV() {
+// Specify the path to your CSV file
+    const csvFilePath = './assest/Shpwithyear.csv';
+
+// using library Papa Parse 
+    Papa.parse(csvFilePath, {
         download: true,
-        complete: function(results) {
-            createGraph(selection, results.data);
-        }
-    });
-}
+        header: true,
+        complete: function (results) {
+          const csvData = results.data;
 
+// Extract required colums and prepare the data for the pie chart
+    const chartData
 
-function createGraph(selection, data) {
-    var Country = [];
-    var Exports = [];
-    // All non-country entries in the global_waste_exports_2010.csv file
-    // Separated so we can easily do different views
-    let continents = ["Africa", "Asia", "Europe", "North America", "South America", "Oceania"];
-    let income_levels = ["Low-income countries", "Lower-middle-income countries", "Upper-middle-income countries",
-        "High-income countries"];
-
-    // Not the world's most efficient code, but it works
-    switch (selection) {
-        case "Country":
-            for (var i = 0; i < data.length; i++) {
-                // Just countries
-                if (!continents.includes(data[i][0]) && !income_levels.includes(data[i][0]) && data[i][0] != "World") {
-                    Country.push(data[i][0]);
-                    Exports.push(data[i][2]);
-                } else {
-                    console.log("Excluded: " + data[i][0]);
-                }
-            }
-            break;
-        case "Continent":
-            // Just continents
-            for (var i = 0; i < data.length; i++) {
-                if (continents.includes(data[i][0])) {
-                    Country.push(data[i][0]);
-                    Exports.push(data[i][2]);
-                } else {
-                    console.log("Excluded: " + data[i][0]);
-                }
-            }
-            break;
-        case "Income Level":
-            // Just income levels
-            for (var i = 0; i < data.length; i++) {
-                if (income_levels.includes(data[i][0])) {
-                    Country.push(data[i][0]);
-                    Exports.push(data[i][2]);
-                } else {
-                    console.log("Excluded: " + data[i][0]);
-                }
-            }
-            break;
-        default:
-            console.log("Error: default value reached in switch statement");
-    }
-
-    // console.log(Country);
-    // console.log(Exports);
 
     // Creates the pie chart
     var summary = c3.generate({
