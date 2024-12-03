@@ -15,8 +15,8 @@ function drawChart() {
     var options = {
         curveType: 'function',
         legend: { position: 'top' },
-        width: 380,  
-        height: 200,
+        width: 300,  
+        height: 170,
         
         vAxis: {
             viewWindow: {

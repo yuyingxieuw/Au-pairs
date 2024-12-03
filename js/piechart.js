@@ -35,8 +35,8 @@ function loadCSV() {
 
 // Define chart options
     const options = {
-        width: 300,  
-        height: 200,
+        width: 250,  
+        height: 180,
         top: 0,
         bottom:0,
         chartArea: {
