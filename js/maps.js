@@ -12,18 +12,18 @@ mapboxgl.accessToken =
         radii = [5, 10, 15, 20, 25];
         
         map.on('load', () => { 
-            map.addSource('MapGeojson', {
+            map.addSource('partinumber', {
                 type: 'geojson',
-                data: 'assets/MapGeojson.geojson'
+                data: 'assets/partinumber.geojson'
             });
 
         map.addLayer({
                 'id': 'polygon-layer',
                 'type': 'fill',
-                'source': 'MapGeojson',
+                'source': 'partinumber',
                 'paint': {
                     'fill-color': {
-                        'property': 'All Stat_1', // Match property from your GeoJSON data
+                        'property': '2023', // Match property from your GeoJSON data
                         'stops': [
                             [10, 'rgb(235,209,256)'],
                             [100, 'rgb(205,145,242)'],
@@ -36,7 +36,9 @@ mapboxgl.accessToken =
                     'fill-opacity': 0.6 // Adjust the transparency
                 }
             });
-            // click on tree to view magnitude in a popup
+    
+
+
 // create legend object, it will anchor to the div element with the id legend.
 const legend = document.getElementById('legend');
 
