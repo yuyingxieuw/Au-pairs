@@ -35,9 +35,15 @@ function loadCSV() {
 
 // Define chart options
     const options = {
-        title: 'Au Pair Participants',
         width: 400,  
         height: 200,
+        top: 0,
+        chartArea: {
+            left: 10, // Adjust chart's left padding
+            top: 20, // Adjust chart's top padding
+            width: '90%', // Adjust the width of the chart area
+            height: '90%' // Adjust the height of the chart area
+          },
          };
 // Create and draw the pie chart
     const chart = new google.visualization.PieChart(document.getElementById('piechart'));

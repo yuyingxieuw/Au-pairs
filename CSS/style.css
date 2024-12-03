@@ -84,7 +84,7 @@ body {
   .dropbtn {
     background-color: #673dca;
     color: white;
-    padding: 16px;
+    padding: 8px;
     font-size: 16px;
     border: none;
     border-radius: 10px;
@@ -118,6 +118,12 @@ body {
   .dropdown:hover .dropbtn {background-color: #673dca;}
   /* End of dropdown button styling */
   
+  #piechart {
+    margin-top: 10px;
+    width: 500px;
+    height: 300px;
+  }
+
   #title {
     position: absolute;
     top: 0;
