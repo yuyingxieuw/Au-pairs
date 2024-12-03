@@ -7,20 +7,23 @@ body {
   .container {
     display: flex;
     margin: 0 auto;
-    padding: 10px;
+    padding: 8px;
+    width: 1730px
   }
   
   .map {
-    flex-basis: 70%;
+    flex-basis: 75%;
     height: 90vh;
+    width: 30px; 
   }
   
   .widgets {
+    margin-left: 0%;
     display: flex;
-    flex-basis: 30%;
+    flex-basis: 25%;
     flex-direction: column;
     height: 90vh;
-    width: 10px; 
+    width: 6px; 
     position: relative;
   }
   
