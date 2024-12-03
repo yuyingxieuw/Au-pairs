@@ -12,23 +12,15 @@ mapboxgl.accessToken =
         radii = [5, 10, 15, 20, 25];
         
         map.on('load', () => { 
-            map.addSource('MapGepjson', {
+            map.addSource('MapGeojson', {
                 type: 'geojson',
                 data: 'assets/MapGeojson.geojson'
             });
 
-            console.log('GeoJSON source added');
-    
-            map.on('sourcedata', (e) => {
-                if (e.sourceId === 'MapGeojson' && e.isSourceLoaded) {
-                    console.log('GeoJSON data loaded successfully');
-                }
-            });
-
-            map.addLayer({
+        map.addLayer({
                 'id': 'polygon-layer',
                 'type': 'fill',
-                'source': 'MapGepjson',
+                'source': 'MapGeojson',
                 'paint': {
                     'fill-color': {
                         'property': 'All Stat_1', // Match property from your GeoJSON data
