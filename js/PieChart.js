@@ -5,7 +5,7 @@ google.charts.setOnLoadCallback(loadCSV);
 // Loads data  csv
 function loadCSV() {
 // Specify the path to your CSV file
-    const csvFilePath = './assest/Shpwithyear.csv';
+    const csvFilePath = './assets/Shpwithyear.csv';
 
 // using library Papa Parse 
     Papa.parse(csvFilePath, {
