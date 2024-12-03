@@ -13,11 +13,11 @@ function drawChart() {
         ['2022',21449,423],
     ]);
     var options = {
-        title: 'Au Pair Participants and Visa Sponsors',
         curveType: 'function',
         legend: { position: 'top' },
-        width: 400,  
+        width: 380,  
         height: 200,
+        
         vAxis: {
             viewWindow: {
                 min: 0,   // Set minimum value of Y-axis

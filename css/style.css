@@ -8,7 +8,6 @@ body {
     display: flex;
     margin: 0 auto;
     padding: 8px;
-    width: 1730px
   }
   
   .map {
@@ -51,12 +50,16 @@ body {
   }
   
   .widget h2 {
+    margin-left:0;
     margin-top: 0;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: normal;
   }
   
   .widget p {
+    margin-left:0;
+    margin-right:0;
+    margin-top: 0;
     margin-bottom: 0;
     font-size: 13px;
   }
@@ -80,7 +83,7 @@ body {
   }
   
   p {
-    margin: 10px;
+    margin: 0px;
   }
   
   /* Dropdown menu styling */

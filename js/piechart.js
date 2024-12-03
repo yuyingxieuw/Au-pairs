@@ -35,14 +35,16 @@ function loadCSV() {
 
 // Define chart options
     const options = {
-        width: 400,  
+        width: 300,  
         height: 200,
         top: 0,
+        bottom:0,
         chartArea: {
-            left: 10, // Adjust chart's left padding
-            top: 20, // Adjust chart's top padding
-            width: '90%', // Adjust the width of the chart area
-            height: '90%' // Adjust the height of the chart area
+            left: 5, // Adjust chart's left padding
+            top: 5, // Adjust chart's top padding
+            bottom: 0,
+            width: '100%', // Adjust the width of the chart area
+            height: '100%' // Adjust the height of the chart area
           },
          };
 // Create and draw the pie chart
