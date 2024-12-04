@@ -25,41 +25,76 @@ mapboxgl.accessToken =
                     'fill-color': {
                         'property': '2023', // Match property from your GeoJSON data
                         'stops': [
-                            [10, 'rgb(235,209,256)'],
-                            [100, 'rgb(205,145,242)'],
-                            [200, 'rgb(161,53,237)'], 
-                            [500, 'rgb(138,18,237)'], 
-                            [1000, 'rgb(84,9,149)'],
-                            [3000, 'rgb(58,5,102)']
+                            [0, 'rgb(255,255,255)'],
+                            [10, 'rgb(131,208,201)'],
+                            [100, 'rgb(101,195,186)'],
+                            [600, 'rgb(84,178,169)'], 
+                            [1200, 'rgb(53,167,156)'], 
+                            [2000, 'rgb(0,150,136)'],
                         ]
                     },
                     'fill-opacity': 0.6 // Adjust the transparency
                 }
             });
     
+           const layers = [
+                '0 - 10',
+                '10 - 100',
+                '100-600',
+                '600 - 1200',
+                '1200-2000',
+                '2000 and more',
+           ];
+            
+           const colors=[
+                'rgb(255,255,255)',
+                'rgb(131,208,201)',
+                'rgb(101,195,186)',
+                'rgb(84,178,169)', 
+                'rgb(53,167,156)', 
+                'rgb(0,150,136)',
+            ];
 
+       
 
 // create legend object, it will anchor to the div element with the id legend.
 const legend = document.getElementById('legend');
 
-//set up legend grades and labels
-var labels = ['<center><strong>Participants in each state</center></strong>'], vbreak;
-//iterate through grades and create a scaled circle and label for each
-for (var i = 0; i < grades.length; i++) {
-    vbreak = grades[i];
-    // you need to manually adjust the radius of each dot on the legend 
-    // in order to make sure the legend can be properly referred to the dot on the map.
-    dot_radius = 4 * radii[i];
-    labels.push(
-        '<p class="break"><i class="dot" style="background:' + colors[i] + '; width: ' + dot_radius +
-        'px; height: ' +
-        dot_radius + 'px; "></i> <span class="dot-label" style="top: ' + dot_radius / 2 + 'px;">' + vbreak +
-        '</span></p>');
+// Add legend title
+const title = document.createElement('div');
+title.innerHTML = '<center><strong>Participants in each state</strong></center>';
+legend.appendChild(title);
 
-}
-
-// combine all the html codes.
-legend.innerHTML = labels.join('');
+// Iterate through layers and create a legend item for each
+layers.forEach((layer, i) => {
+    const color = colors[i];
+    
+    // Create container for each legend item
+    const item = document.createElement('div');
+    item.style.display = 'flex';
+    item.style.alignItems = 'center';
+    item.style.marginBottom = '4px';
+    
+    // Create the color key
+    const key = document.createElement('span');
+    key.className = 'legend-key';
+    key.style.backgroundColor = color;
+    key.style.width = '20px';
+    key.style.height = '20px';
+    key.style.display = 'inline-block';
+    key.style.marginRight = '8px';
+    
+    // Add the label
+    const value = document.createElement('span');
+    value.innerHTML = `${layer}`;
+    
+    // Combine key and label
+    item.appendChild(key);
+    item.appendChild(value);
+    
+    // Append item to the legend
+    legend.appendChild(item);
+});
 
 
         });
