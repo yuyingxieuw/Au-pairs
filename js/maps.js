@@ -7,10 +7,9 @@ mapboxgl.accessToken =
             center: [-90, 38] // starting center
         });
         
-        const grades = [10, 100, 200, 500, 1000],
-        colors = ['rgb(235,209,256)', 'rgb(205,145,242)', 'rgb(161,53,237)', 'rgb(138,18,237)', 'rgb(84,9,149)', 'rgb(58,5,102)'],
-        radii = [5, 10, 15, 20, 25];
-        
+        let years = ['2016','2017','2018', '2019', '2020', '2021', '2022', '2023']; // Add time-series years
+        let currentYearIndex = 2016; // Start with the first year
+       
         map.on('load', () => { 
             map.addSource('partinumber', {
                 type: 'geojson',
@@ -23,7 +22,7 @@ mapboxgl.accessToken =
                 'source': 'partinumber',
                 'paint': {
                     'fill-color': {
-                        'property': '2023', // Match property from your GeoJSON data
+                        'property': '2016', // Match property from your GeoJSON data
                         'stops': [
                             [0, 'rgb(255,255,255)'],
                             [10, 'rgb(131,208,201)'],
@@ -36,15 +35,7 @@ mapboxgl.accessToken =
                     'fill-opacity': 0.6 // Adjust the transparency
                 }
             });
-    
-           const layers = [
-                '0 - 10',
-                '10 - 100',
-                '100-600',
-                '600 - 1200',
-                '1200-2000',
-                '2000 and more',
-           ];
+     
             
            const colors=[
                 'rgb(255,255,255)',
@@ -64,6 +55,15 @@ const legend = document.getElementById('legend');
 const title = document.createElement('div');
 title.innerHTML = '<center><strong>Participants in each state</strong></center>';
 legend.appendChild(title);
+
+const layers = [
+    '0 - 10',
+    '10 - 100',
+    '100-600',
+    '600 - 1200',
+    '1200-2000',
+    '2000 and more',
+];
 
 // Iterate through layers and create a legend item for each
 layers.forEach((layer, i) => {
@@ -95,6 +95,5 @@ layers.forEach((layer, i) => {
     // Append item to the legend
     legend.appendChild(item);
 });
-
 
         });
