@@ -46,7 +46,50 @@ mapboxgl.accessToken =
                 'rgb(0,150,136)',
             ];
 
-       
+// create pupup function
+map.on('mouseenter', 'polygon-layer', (event) => {
+    if (event.features.length > 0) {
+        const feature = event.features[0];
+        
+        // Determine if the geometry is Polygon or MultiPolygon
+        const geometry = feature.geometry;
+        let coordinates;
+
+        if (geometry.type === 'Polygon') {
+            // Get the first coordinate of the Polygon
+            coordinates = geometry.coordinates[0][0];
+        } else if (geometry.type === 'MultiPolygon') {
+            // Get the first coordinate of the first Polygon in the MultiPolygon
+            coordinates = geometry.coordinates[0][0][0];
+        }
+
+        // Get the property for the popup
+        const participantCount = feature.properties['2016'];
+        const name = feature.properties['name'];
+
+        // Only create a popup if the property exists
+        if (participantCount !== undefined && name) {
+            const popup= new mapboxgl.Popup({
+                closeButton: false, // No close button for hover popups
+                closeOnClick: false // Do not close on map clicks
+            })
+            
+                .setLngLat(coordinates)
+                .setHTML(`<strong>Participants in ${name}:</strong> ${participantCount}`)
+                .addTo(map);
+       //Save the popup instance so it can be removed later
+       map.currentPopup =popup;
+    }
+    }
+}); 
+
+// Remove the popup on mouseleave
+map.on('mouseleave', 'polygon-layer', () => {
+    if (map.currentPopup) {
+        map.currentPopup.remove(); // Remove the popup
+        map.currentPopup = null; // Clear the reference
+    }
+});
 
 // create legend object, it will anchor to the div element with the id legend.
 const legend = document.getElementById('legend');
