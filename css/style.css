@@ -353,12 +353,16 @@ body {
   }
 
   .time-buttons {
-    position: flex;
-    gap:5px
+    display: flex; /* Use 'display: flex' instead of 'position: flex' */
+    flex-wrap: wrap; /* Allows wrapping if needed */
+    gap: 5px; /* Space between buttons */
+    padding: 0; /* Remove extra padding to control spacing */
+    margin: 0; /* Add margin of 5px to the top and bottom */
 }
 
+
  .time-buttons button  {
-  padding: 5px 10px;
+  padding: 5px 25px;
   border: 1px solid #ccc;
   background: #f9f9f9;
   cursor: pointer;
@@ -372,13 +376,16 @@ body {
 
 .button-container {
   position: fixed;
-  bottom: 20px;
-  left: 30%;
-  background: rgba(255, 255, 255, 0.8);
+  bottom: 60px;
+  left: 27%;
+  background-color: hsl(0, 0%, 50%);
+  border-radius: 5px;
+  opacity: 0.9;
   border-style: solid;
   border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.2);
+  border-color: hsla(0, 21%, 95%, 0.2);
   font-family: 'Open Sans', sans-serif;
   overflow: auto;
-  border-radius: 3px;
+  padding: 3px; /* Add padding inside the container for uniform spacing */
+  margin: 5px 0; /* Add margin outside the container */
 }
