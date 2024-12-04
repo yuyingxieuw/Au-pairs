@@ -7,8 +7,8 @@ mapboxgl.accessToken =
             center: [-90, 38] // starting center
         });
         
+        let currentYear = '2016'
         let years = ['2016','2017','2018', '2019', '2020', '2021', '2022', '2023']; // Add time-series years
-        let currentYearIndex = 2016; // Start with the first year
        
         map.on('load', () => { 
             map.addSource('partinumber', {
@@ -21,22 +21,45 @@ mapboxgl.accessToken =
                 'type': 'fill',
                 'source': 'partinumber',
                 'paint': {
-                    'fill-color': {
-                        'property': '2016', // Match property from your GeoJSON data
-                        'stops': [
+                    'fill-color': [
+                        'interpolate'
+                        ['linear'],
+                        ['get', currentYear],
+                        , // Match property from your GeoJSON data
                             [0, 'rgb(255,255,255)'],
                             [10, 'rgb(131,208,201)'],
                             [100, 'rgb(101,195,186)'],
                             [600, 'rgb(84,178,169)'], 
                             [1200, 'rgb(53,167,156)'], 
                             [2000, 'rgb(0,150,136)'],
-                        ]
-                    },
+                        ],
                     'fill-opacity': 0.6 // Adjust the transparency
                 }
             });
      
-            
+   // Event listener for year buttons
+   document.getElementById('time-buttons').addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
+        const selectedYear = event.target.getAttribute('data-year');
+        if (selectedYear && selectedYear !== currentYear) {
+            currentYear = selectedYear;
+
+            // Update the fill-color property dynamically
+            map.setPaintProperty('polygon-layer', 'fill-color', [
+                'interpolate',
+                ['linear'],
+                ['get', currentYear],
+                0, 'rgb(255,255,255)',
+                10, 'rgb(131,208,201)',
+                100, 'rgb(101,195,186)',
+                600, 'rgb(84,178,169)',
+                1200, 'rgb(53,167,156)',
+                2000, 'rgb(0,150,136)'
+            ]);
+        }
+    }
+});
+});            
            const colors=[
                 'rgb(255,255,255)',
                 'rgb(131,208,201)',
@@ -139,4 +162,4 @@ layers.forEach((layer, i) => {
     legend.appendChild(item);
 });
 
-        });
+      
