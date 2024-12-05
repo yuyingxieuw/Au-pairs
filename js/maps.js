@@ -22,7 +22,7 @@ mapboxgl.accessToken =
                 'source': 'partinumber',
                 'paint': {
                     'fill-color': {
-                        'property': '2016', // Match property from your GeoJSON data
+                        'property': '2020', // Match property from your GeoJSON data
                         'stops': [
                             [0, 'rgb(255,255,255)'],
                             [10, 'rgb(131,208,201)'],
@@ -64,7 +64,7 @@ map.on('mouseenter', 'polygon-layer', (event) => {
         }
 
         // Get the property for the popup
-        const participantCount = feature.properties['2016'];
+        const participantCount = feature.properties['2020'];
         const name = feature.properties['name'];
 
         // Only create a popup if the property exists

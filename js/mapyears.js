@@ -25,7 +25,7 @@ mapboxgl.accessToken =
                 data: 'assets/partinumber.geojson'
             });
 
-        map.addLayer({
+            map.addLayer({
                 'id': 'polygon-layer',
                 'type': 'fill',
                 'source': 'partinumber',
@@ -44,9 +44,31 @@ mapboxgl.accessToken =
             'fill-opacity': 0.6 // Adjust the transparency
         }
             });
-     
- // create the button function
-          
+   
+
+ // create the toddle function
+ document.getElementById('time-buttons').addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
+        const selectedYear = event.target.getAttribute('data-year');
+        if (selectedYear && selectedYear !== currentYear) {
+            currentYear = selectedYear;
+
+            // Update the fill-color dynamically
+            map.setPaintProperty('polygon-layer', 'fill-color', [
+                'interpolate',
+                ['linear'],
+                ['get', currentYear],
+                0, 'rgb(255,255,255)',
+                10, 'rgb(131,208,201)',
+                100, 'rgb(101,195,186)',
+                600, 'rgb(84,178,169)',
+                1200, 'rgb(53,167,156)',
+                2000, 'rgb(0,150,136)'
+            ]);
+        }
+    }
+});
+
 
 // create pupup function
 map.on('mouseenter', 'polygon-layer', (event) => {
@@ -66,7 +88,7 @@ map.on('mouseenter', 'polygon-layer', (event) => {
         }
 
         // Get the property for the popup
-        const participantCount = feature.properties['2016'];
+        const participantCount = feature.properties[currentYear];
         const name = feature.properties['name'];
 
         // Only create a popup if the property exists
