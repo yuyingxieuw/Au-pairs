@@ -224,7 +224,7 @@ mapboxgl.accessToken =
 
 // Human-readable text for each layer
 const id_text = {
-    'polygon-2016': 'year 2016',
+    'polygon-2016':'year 2016',
     'polygon-2017':'year 2017',
     'polygon-2018':'year 2018',
     'polygon-2019':'year 2019',
