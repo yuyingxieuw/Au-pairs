@@ -6,7 +6,7 @@ In the US, the Au Pair Program operates under the J-1 Exchange Visitor Visa Prog
 
  ## Screenshot 
 
-![Dashborad interface](img/Screenshot.jpgimage.png)
+![Dashborad interface](img/Screenshot.jpg)
 
 ## Applied Libraries:
 Mapbox GL js
