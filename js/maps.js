@@ -80,10 +80,13 @@ function updateMap(year) {
 }
 
 map.on('mouseenter', 'polygon-layer', (event) => {
+    if (map.currentPopup) map.currentPopup.remove();
+
     if (event.features.length > 0) {
         const feature = event.features[0];
         const participantCount = feature.properties[currentYear];
         const name = feature.properties['name'];
+        
 
         // Use the mouse's position instead of polygon vertices
         const mouseLngLat = event.lngLat; 
@@ -91,7 +94,8 @@ map.on('mouseenter', 'polygon-layer', (event) => {
         if (participantCount !== undefined && name) {
             const popup = new mapboxgl.Popup({
                 closeButton: false,
-                closeOnClick: false
+                closeOnClick: false,
+                offset: [25,0] // Shift popup 25px to the right of the cursor
             })
                 .setLngLat(mouseLngLat) // Use mouse position
                 .setHTML(`<strong>Participants in ${name}:</strong> ${participantCount}`)
@@ -109,13 +113,6 @@ map.on('mouseleave', 'polygon-layer', () => {
     }
 });
 
-// Remove the popup on mouseleave
-map.on('mouseleave', 'polygon-layer', () => {
-    if (map.currentPopup) {
-        map.currentPopup.remove(); // Remove the popup
-        map.currentPopup = null; // Clear the reference
-    }
-});
 
 // create legend object, it will anchor to the div element with the id legend.
 const legend = document.getElementById('legend');
