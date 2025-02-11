@@ -1,13 +1,23 @@
 mapboxgl.accessToken =
             'pk.eyJ1IjoieW91emlkb3VzaGkiLCJhIjoiY2xkZ21wcGRzMDBrajNubXRmdmJ0MnB2YSJ9.NvBSJcMyw5ArBpn2KhJl2A';
         let map = new mapboxgl.Map({
-            container: 'map', // container ID
+            container: 'map', 
             style: 'mapbox://styles/mapbox/light-v10',
-            zoom: 3.0, // starting zoom
-            center: [-90, 38] // starting center
+            zoom: 3.0, 
+            center: [-90, 38] 
         });
         
-        let currentYear = 2016; // Start with the first year
+        let currentYear = '2016'; // Start with the first year
+
+        // define color array for legend
+        const colors = [
+            'rgb(255,255,255)',
+            'rgb(131,208,201)',
+            'rgb(101,195,186)',
+            'rgb(84,178,169)', 
+            'rgb(53,167,156)', 
+            'rgb(0,150,136)',
+        ];
        
         map.on('load', () => { 
             map.addSource('partinumber', {
@@ -37,7 +47,7 @@ mapboxgl.accessToken =
      
 // Add year button functionality
 document.querySelectorAll('.layer_menu button').forEach(button => {
-    button.addEvenListerner('click', function() {
+    button.addEventListener('click', function() {
         const year = this.getAttribute('data-year');
             updateMap (year);
     
@@ -130,6 +140,8 @@ const layers = [
     '1200-2000',
     '2000 and more',
 ];
+
+
 
 // Iterate through layers and create a legend item for each
 layers.forEach((layer, i) => {
