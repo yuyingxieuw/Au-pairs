@@ -79,42 +79,35 @@ function updateMap(year) {
     }
 }
 
-// dynamic pupup with current year
 map.on('mouseenter', 'polygon-layer', (event) => {
     if (event.features.length > 0) {
         const feature = event.features[0];
-        
-        // Determine if the geometry is Polygon or MultiPolygon
-        const geometry = feature.geometry;
-        let coordinates;
-
-        if (geometry.type === 'Polygon') {
-            // Get the first coordinate of the Polygon
-            coordinates = geometry.coordinates[0][0];
-        } else if (geometry.type === 'MultiPolygon') {
-            // Get the first coordinate of the first Polygon in the MultiPolygon
-            coordinates = geometry.coordinates[0][0][0];
-        }
-
-        // Get the property for the popup
         const participantCount = feature.properties[currentYear];
         const name = feature.properties['name'];
 
-        // Only create a popup if the property exists
+        // Use the mouse's position instead of polygon vertices
+        const mouseLngLat = event.lngLat; 
+
         if (participantCount !== undefined && name) {
-            const popup= new mapboxgl.Popup({
-                closeButton: false, // No close button for hover popups
-                closeOnClick: false // Do not close on map clicks
+            const popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false
             })
-            
-                .setLngLat(coordinates)
+                .setLngLat(mouseLngLat) // Use mouse position
                 .setHTML(`<strong>Participants in ${name}:</strong> ${participantCount}`)
                 .addTo(map);
-       //Save the popup instance so it can be removed later
-       map.currentPopup =popup;
+
+            map.currentPopup = popup;
+        }
     }
+});
+
+map.on('mouseleave', 'polygon-layer', () => {
+    if (map.currentPopup) {
+        map.currentPopup.remove();
+        map.currentPopup = null;
     }
-}); 
+});
 
 // Remove the popup on mouseleave
 map.on('mouseleave', 'polygon-layer', () => {
