@@ -7,8 +7,7 @@ mapboxgl.accessToken =
             center: [-90, 38] // starting center
         });
         
-        let years = ['2016','2017','2018', '2019', '2020', '2021', '2022', '2023']; // Add time-series years
-        let currentYearIndex = 2016; // Start with the first year
+        let currentYear = 2016; // Start with the first year
        
         map.on('load', () => { 
             map.addSource('partinumber', {
@@ -22,7 +21,7 @@ mapboxgl.accessToken =
                 'source': 'partinumber',
                 'paint': {
                     'fill-color': {
-                        'property': '2020', // Match property from your GeoJSON data
+                        'property': currentYear, // Match property from your GeoJSON data
                         'stops': [
                             [0, 'rgb(255,255,255)'],
                             [10, 'rgb(131,208,201)'],
@@ -36,17 +35,41 @@ mapboxgl.accessToken =
                 }
             });
      
-            
-           const colors=[
-                'rgb(255,255,255)',
-                'rgb(131,208,201)',
-                'rgb(101,195,186)',
-                'rgb(84,178,169)', 
-                'rgb(53,167,156)', 
-                'rgb(0,150,136)',
-            ];
+// Add year button functionality
+document.querySelectorAll('.layer_menu button').forEach(button => {
+    button.addEvenListerner('click', function() {
+        const year = this.getAttribute('data-year');
+            updateMap (year);
+    
+    });
+});        
 
-// create pupup function
+// update popup and legend when years changes 
+function updateMap(year) {
+    currentYear = year;
+
+
+    //update map layer
+    map.setPaintProperty ('polygon-layer', 'fill-color', {
+        'property': year,
+        'stops': [
+            [0, 'rgb(255,255,255)'],
+            [10, 'rgb(131,208,201)'],
+            [100, 'rgb(101,195,186)'],
+            [600, 'rgb(84,178,169)'], 
+            [1200, 'rgb(53,167,156)'], 
+            [2000, 'rgb(0,150,136)'],   
+        ]
+    });
+
+    // update legend title 
+    const legendTitle = document.querySelector ('#legend div:first-child');
+    if (legendTitle) {
+        legendTitle.innerHTML = `<center><strong>Participants in each state (${year})</strong></center>`;
+    }
+}
+
+// dynamic pupup with current year
 map.on('mouseenter', 'polygon-layer', (event) => {
     if (event.features.length > 0) {
         const feature = event.features[0];
@@ -64,7 +87,7 @@ map.on('mouseenter', 'polygon-layer', (event) => {
         }
 
         // Get the property for the popup
-        const participantCount = feature.properties['2020'];
+        const participantCount = feature.properties[currentYear];
         const name = feature.properties['name'];
 
         // Only create a popup if the property exists
