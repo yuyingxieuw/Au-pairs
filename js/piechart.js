@@ -1,8 +1,8 @@
 // global var
-let currentYear = '2023';
+let currentYearpie = '2023';
 function selectView(year){
-    currentYear = year;
-    document.getElementById('pie_selector'. innerHTML = year;
+    currentYearpie = year;
+    document.getElementById('pie_selector'. innerHTML = year);
         loadCSV (year);
 }
 
@@ -47,7 +47,6 @@ function drawChart(chartData) {
 
 // Define chart options
     const options = {
-        title: `Participants in ${currentYear}`,
         width: 250,  
         height: 180,
         top: 0,
