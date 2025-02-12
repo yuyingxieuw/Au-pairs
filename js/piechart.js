@@ -1,9 +1,17 @@
+// global var
+let currentYear = '2023';
+function selectView(year){
+    currentYear = year;
+    document.getElementById('pie_selector'. innerHTML = year;
+        loadCSV (year);
+}
+
 //load google package
 google.charts.load('current', { packages: ['corechart'] });
-google.charts.setOnLoadCallback(loadCSV);
+google.charts.setOnLoadCallback(() => loadCSV(currentYear));
 
 // Loads data  csv
-function loadCSV() {
+function loadCSV(selectedYear = '2023') {
 // Specify the path to your CSV file
     const csvFilePath = 'assets/Shpwithyear.csv';
 
@@ -13,28 +21,33 @@ function loadCSV() {
         header: true,
         complete: function (results) {
           const csvData = results.data;
+          
 
 // Extract required colums and prepare the data for the pie chart
-    const chartData = [['Category', 'Value']];
-        csvData.forEach(row => {
-        chartData.push([row['name'], parseFloat(row['2023'])]);
+const chartData = [['State', 'Participants']];
+        
+csvData.forEach(row => {
+    if (row[selectedYear]) {
+        chartData.push([row['name'], parseFloat(row[selectedYear])]);
+    }
     });
 
 //Pass the prepared data to the drawChart function
     drawChart(chartData)
                 },
-        error: function (error) {
+    error: function (error) {
         console.error('Error parsing CSV file:', error);
         }
         });
         }
 
-    function drawChart(chartData) {
-            // Convert array data to Google Charts DataTable
-            const data = google.visualization.arrayToDataTable(chartData);
+function drawChart(chartData) {
+    // Convert array data to Google Charts DataTable
+    const data = google.visualization.arrayToDataTable(chartData);
 
 // Define chart options
     const options = {
+        title: `Participants in ${currentYear}`,
         width: 250,  
         height: 180,
         top: 0,
