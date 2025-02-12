@@ -22,7 +22,7 @@ mapboxgl.accessToken =
         map.on('load', () => { 
             map.addSource('partinumber', {
                 type: 'geojson',
-                data: 'assets/partinumber.geojson'
+                data: 'assets/simple.geojson'
             });
 
         map.addLayer({
@@ -79,7 +79,8 @@ function updateMap(year) {
     }
 }
 
-map.on('mouseenter', 'polygon-layer', (event) => {
+// dynamic pop up function 
+map.on('mousemove', 'polygon-layer', (event) => {
     if (map.currentPopup) map.currentPopup.remove();
 
     if (event.features.length > 0) {
@@ -94,8 +95,7 @@ map.on('mouseenter', 'polygon-layer', (event) => {
         if (participantCount !== undefined && name) {
             const popup = new mapboxgl.Popup({
                 closeButton: false,
-                closeOnClick: false,
-                offset: [25,0] // Shift popup 25px to the right of the cursor
+                closeOnClick: false
             })
                 .setLngLat(mouseLngLat) // Use mouse position
                 .setHTML(`<strong>Participants in ${name}:</strong> ${participantCount}`)
@@ -112,6 +112,7 @@ map.on('mouseleave', 'polygon-layer', () => {
         map.currentPopup = null;
     }
 });
+
 
 
 // create legend object, it will anchor to the div element with the id legend.
