@@ -28,7 +28,6 @@
   </header>  
 
  
-<!-- "container" & "widgets" div -->
     <div class="container">
      <div class="widgets">
       <div class="widget-background"></div>
@@ -41,7 +40,6 @@
          <p>This chart visualizes the change of totall Au Pair Project participants during 2016-2022 in Untied States </p> 
         </div>
     
-     <!-- Loads line graph chart -->
      <script src="js/LineGraph.js"></script>
     
   <!--Curve Chart SECTION END-->
@@ -96,6 +94,14 @@
     <!-- CHLOROPETH MAP SECTION -->
     
     <div id="map"></div>
+    <div class="map-button">
+      <div class="map_style">
+      <button>Proportional Dots Map</button>
+      <button>Choropleth Map</button>
+    </div>
+    </div>
+
+        
        <!--time button-->
        <div class="button-container"> 
         <div class="layer_menu">
@@ -108,12 +114,7 @@
           <button data-year="2022">2022</button>
           <button data-year="2023">2023</button>
       </div>
-    <script src="js/maps.js"></script>
+    <script src="js/configured.js"></script>
     </div> <!--button container div-->
     <div id="legend"></div>
-    <div id="title"></div>
-    
-   
-  </div> <!-- "container" div -->    
-  </body>
-</html>
+    <div id="title"></div> 
